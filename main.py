@@ -1,11 +1,14 @@
 import os
+import os.path
 import sys
 import sqlite3 as sql
 from datetime import datetime, date, time
 
 # Make sqlite3 database connection
-conn = sql.connect('reminder_db.db')
+DB_NAME = 'reminder_db.db'
+conn = sql.connect(DB_NAME)
 cursor = conn.cursor()
+
 
 # Reminder ASCII Art for style
 header = """
@@ -63,15 +66,15 @@ def view_remind(rec=0):
 		os.system('clear')
 		cursor.execute("SELECT *FROM reminder")
 		data = cursor.fetchall()
-		print("{} {} {} {} ".format("|id|", "|title|", "|created date|", "|remind date|"))
-		print("{} {} {} {} ".format("-"*4, "-"*7, "-"*14, "-"*13))
+		print("{0:5} {1:20} {2:5} {3} ".format("|id|", "|title|", "|created date|", "|remind date|"))
+		print("{0:5} {1:20} {2:5} {3} ".format("-"*4, "-"*7, "-"*14, "-"*13))
 		for item in data:
-			print("{0:3} {1:10} {2:11} {3:3} ".format(str(item[0]), item[1], item[2], item[3]))
+			print("{0:5} {1:20} {2:5} {3:3} ".format(str(item[0]), item[1], item[2], item[3]))
 	else:
 		os.system('clear')
 		cursor.execute("SELECT *FROM reminder WHERE id = ?", (rec, ))
 		data = cursor.fetchall()
-		print("{} {} {} {} ".format("|id|", "|title|", "|created date|", "|remind date|"))
+		print("{0} {1} {2:10} {3} ".format("|id|", "|title|", "|created date|", "|remind date|"))
 		print("{} {} {} {} ".format("-"*4, "-"*7, "-"*14, "-"*13))
 		for item in data:
 			print("{} {} {} {} ".format(item[0], item[1], item[2], item[3]))
@@ -102,7 +105,8 @@ def update_reminder():
 					SET title = ?,
 					create_date = ?,
 					remind_date = ? 
-					WHERE id =?''', (remind_content, 
+					WHERE id =?''',
+					(remind_content, 
 						datetime.now(),
 						combined_date,
 						task_id)) 
@@ -136,7 +140,7 @@ def main_menu():
 
 			elif int(choice) == 2:
 				
-				view_remind(input("Which reminder you want to view? "))
+				view_remind(input("Which reminder you want to view (ID)? "))
 
 			elif int(choice) == 3:
 				view_remind(0)
