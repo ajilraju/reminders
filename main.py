@@ -4,6 +4,10 @@
 # Author:
 # Ajil Raju <ajilraju01@gmail.com>
 # 
+# Note:
+# Each time the application start the new database will created
+# other existed database on the working tree will overwritted.
+# 
 
 import os
 import os.path
