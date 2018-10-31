@@ -1,3 +1,10 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+#
+# Author:
+# Ajil Raju <ajilraju01@gmail.com>
+# 
+
 import os
 import os.path
 import sys
@@ -8,7 +15,6 @@ from datetime import datetime, date, time
 DB_NAME = 'reminder_db.db'
 conn = sql.connect(DB_NAME)
 cursor = conn.cursor()
-
 
 # Reminder ASCII Art for style
 header = """
@@ -35,12 +41,10 @@ def insert_remind(rem_name, rem_date):
         VALUES ( ?, ?, ? )''', ( rem_name, str(datetime.now()).split('.')[0], rem_date)) 
 	conn.commit()
 	
-
 # Reminder creation function like get date and content
 def create_reminder():
 	os.system('clear')
-	current_year = datetime.now().year
-	
+	current_year = datetime.now().year	
 	remind_content = input('What you want to remind? ')
 	remind_year = input("Which year you get remind (eg: > "+str(current_year)+")? ")
 	if int(remind_year) < current_year:
@@ -50,14 +54,12 @@ def create_reminder():
 	remind_day = input('Which day you get remind (eg: 29)? ')
 	remind_hour = input('Which hour you get remind (eg: 12)? ')
 	remind_mind = input('Which minute you get remind (eg: 10)? ')
-
 	# get full date like year, month, day
 	full_date = date(int(remind_year), int(remind_month), int(remind_day))
 	# get the full time like hour and minutes
 	full_time = time(int(remind_hour), int(remind_mind))
 	# combined date and time 
 	combined_date = datetime.combine(full_date, full_time)
-	
 	insert_remind(remind_content, combined_date)
 
 # View the reminders as full and specific view
@@ -90,7 +92,6 @@ def update_reminder():
 		main_menu()
 	view_remind(task_id)
 	print("\n{0:~^20s}".format("Update section"))
-
 	remind_content = input('What you want to remind? ')
 	remind_year = input('Which year you get remind (2018)? ')
 	if int(remind_year) < current_year:
@@ -100,7 +101,6 @@ def update_reminder():
 	remind_day = input('Which day you get remind (eg: 29)? ')
 	remind_hour = input('Which hour you get remind (eg: 12)? ')
 	remind_mind = input('Which minute you get remind (eg: 10)? ')
-
 	full_date = date(int(remind_year), int(remind_month), int(remind_day))
 	full_time = time(int(remind_hour), int(remind_mind))
 	combined_date = datetime.combine(full_date, full_time)
@@ -125,10 +125,8 @@ menuItems = [
 	{ "Exit": 4 },
 ]
 			
-def main_menu():
-                                   
+def main_menu():                                
 	while True:
-
 		#os.system('clear')
 		print(header,"\n")
 		for item in menuItems:
