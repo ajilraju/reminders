@@ -83,7 +83,10 @@ def view_remind(rec=0):
 def update_reminder():
 	#os.system('clear')
 	current_year = datetime.now().year
+	print("if want to exit from this enter -> -99")
 	task_id = input("What is the task ID? ")
+	if int(task_id) == -99:
+		main_menu()
 	view_remind(task_id)
 	print("\n{0:~^20s}".format("Update section"))
 
@@ -155,5 +158,5 @@ def main_menu():
 			pass
 
 if __name__ == '__main__':
-	#create_table()
+	create_table()
 	main_menu()
