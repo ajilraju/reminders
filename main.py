@@ -29,10 +29,10 @@ def create_table():
 		""")
 
 # Function for insert reminds to the database 
-def insert_remind(rem_name, rem_create_date, rem_date):
+def insert_remind(rem_name, rem_date):
 	cursor.execute('''INSERT OR IGNORE INTO reminder (
 		title, create_date, remind_date) 
-        VALUES ( ?, ?, ? )''', ( rem_name, rem_create_date, rem_date)) 
+        VALUES ( ?, ?, ? )''', ( rem_name, str(datetime.now()).split('.')[0], rem_date)) 
 	conn.commit()
 	
 
@@ -58,7 +58,7 @@ def create_reminder():
 	# combined date and time 
 	combined_date = datetime.combine(full_date, full_time)
 	
-	insert_remind(remind_content, datetime.now(), combined_date)
+	insert_remind(remind_content, combined_date)
 
 # View the reminders as full and specific view
 def view_remind(rec=0):
@@ -107,7 +107,7 @@ def update_reminder():
 					remind_date = ? 
 					WHERE id =?''',
 					(remind_content, 
-						datetime.now(),
+						str(datetime.now()).split('.')[0],
 						combined_date,
 						task_id)) 
 	conn.commit()
