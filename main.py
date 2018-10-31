@@ -154,9 +154,11 @@ def main_menu():
 			else:
 				pass
 		except ValueError:
-			pass
+			print("Invalid option")
+			os.system('clear')
 		except IndexError:
-			pass
+			print("Out of index")
+			os.system('clear')
 
 if __name__ == '__main__':
 	#create_table()
