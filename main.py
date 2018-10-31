@@ -66,18 +66,19 @@ def view_remind(rec=0):
 		os.system('clear')
 		cursor.execute("SELECT *FROM reminder")
 		data = cursor.fetchall()
-		print("{0:5} {1:20} {2:5} {3} ".format("|id|", "|title|", "|created date|", "|remind date|"))
-		print("{0:5} {1:20} {2:5} {3} ".format("-"*4, "-"*7, "-"*14, "-"*13))
+		print("{0:5} {1:20} {2:25} {3:5} ".format("|id|", "|title|", "|created date     |",
+				"|remind date      |"))
+		print("{0:5} {1:20} {2:25} {3:5} ".format("-"*4, "-"*7, "-"*19, "-"*19))
 		for item in data:
-			print("{0:5} {1:20} {2:5} {3:3} ".format(str(item[0]), item[1], item[2], item[3]))
+			print("{0:5} {1:20} {2:25} {3:5} ".format(str(item[0]), item[1], item[2], item[3]))
 	else:
 		os.system('clear')
 		cursor.execute("SELECT *FROM reminder WHERE id = ?", (rec, ))
 		data = cursor.fetchall()
-		print("{0} {1} {2:10} {3} ".format("|id|", "|title|", "|created date|", "|remind date|"))
-		print("{} {} {} {} ".format("-"*4, "-"*7, "-"*14, "-"*13))
+		print("{0:5} {1:20} {2:25} {3:5}".format("|id|", "|title|", "|created date|", "|remind date|"))
+		print("{0:5} {1:20} {2:25} {3:5} ".format("-"*4, "-"*7, "-"*19, "-"*19))
 		for item in data:
-			print("{} {} {} {} ".format(item[0], item[1], item[2], item[3]))
+			print("{0:5} {1:20} {2:25} {3:5} ".format(item[0], item[1], item[2], item[3]))
 
 # Update the already exists reminders
 def update_reminder():
@@ -158,5 +159,5 @@ def main_menu():
 			pass
 
 if __name__ == '__main__':
-	create_table()
+	#create_table()
 	main_menu()
